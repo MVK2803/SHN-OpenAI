@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import { Navbar, Nav, Form, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import "./Landing.css"
+import "./Landing.css";
+import { useNavigate } from 'react-router-dom';
 function MyApp() {
-  
 
+  
+  const navigate = useNavigate();
+  const handleown=(event)=>
+  {
+    event.preventDefault();
+    navigate("/MyApp");
+  }
   return (
     <div className='main-landing'>
     <div className='nav-landing'>
@@ -26,10 +33,10 @@ function MyApp() {
     <div className='first-landing'>
         
         <div className='left-div'>
-            <button>USE OUR API KEY</button>
+            <button  onClick={handleown}>USE OUR API KEY</button>
         </div>
         <div className='right-div'>
-            <button>USE YOUR API KEY</button>
+            <button  onClick={handleown}>USE YOUR API KEY</button>
             <input placeholder='Enter API KEy'></input>
         </div>
       
