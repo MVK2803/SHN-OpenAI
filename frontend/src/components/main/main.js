@@ -10,6 +10,7 @@ function MyApp() {
   const [image, setImage] = useState(null);
   const [dalle,setDalle]=useState(false);
   const[loading,setLoading]=useState(false);
+  const[dall_img,setDall_img]=useState("");
   const handleDropdownSelect = (eventKey) => {
     setSelectedOption(eventKey);
   }
@@ -44,6 +45,8 @@ function MyApp() {
       console.log(data);
       setLoading(false);
       setTextAreaValue(data.data.text);
+      setDall_img(data.data.image_link);
+      console.log(dall_img);
     } catch (error) {
       console.error(error);
     }
