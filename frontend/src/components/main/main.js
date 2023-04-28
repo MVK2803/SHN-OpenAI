@@ -51,7 +51,7 @@ function MyApp() {
 
   return (
     <div className='main'>
-      <h className="Navbar">Text <span className='color-new'>Genie</span> </h>
+      <h className="Navbar"> Text <span className='color-new'>Genie</span> </h>
       <p>Powered by <a href='https://openai.com/' target="_blank"> OpenAI.com</a></p>
       <hr></hr>
       <div className='button-grp'>
