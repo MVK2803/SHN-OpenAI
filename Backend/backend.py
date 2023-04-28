@@ -26,16 +26,13 @@ def process_image():
         image = Image.open(image)
         text=main.ImageToTextWithAI(image,code)
 
-    #get option from frontend
-    generate_image = True
-
     if generate_image:
         img_link = getAIimage(text)
         print(img_link)
         image_response = requests.get(img_link)
         image_data = image_response.content
-        image = base64.b64encode(image_data).decode('utf-8')
-        response = {'text': text, 'image': image}
+        img = base64.b64encode(image_data).decode('utf-8')
+        response = {'text': text, 'image_link': img_link, "image": img}
         return response
     
     return text
