@@ -8,11 +8,15 @@ function MyApp() {
   const [selectedOption, setSelectedOption] = useState('');
   const [textAreaValue, setTextAreaValue] = useState('');
   const [image, setImage] = useState(null);
+  const [dalle,setDalle]=useState(false);
   const[loading,setLoading]=useState(false);
   const handleDropdownSelect = (eventKey) => {
     setSelectedOption(eventKey);
   }
-
+  const handleCheckboxChange=(event)=> {
+    const isChecked = event.target.checked;
+    setDalle(isChecked);
+  }
   const handleTextAreaChange = (event) => {
     setTextAreaValue(event.target.value);
   }
@@ -26,6 +30,8 @@ function MyApp() {
     //setTextAreaValue("mathew v kariath\nmthjbjkdbakfbd");
     formData.append('image', image);
     formData.append('code', selectedOption);
+    formData.append('dalle',dalle);
+    console.log(dalle);
     setLoading(true)
     try {
       const response = await axios.post('http://localhost:5000/process_image', formData, {
@@ -49,7 +55,7 @@ function MyApp() {
       <p>Powered by <a href='https://openai.com/' target="_blank"> OpenAI.com</a></p>
       <hr></hr>
       <div className='button-grp'>
-    
+      
       <DropdownButton  id="dropdown-basic-button" title="Options" onSelect={handleDropdownSelect}>
               <Dropdown.Item className='button' eventKey="0">Expand Text</Dropdown.Item>
               <Dropdown.Item className='button' eventKey="1">Compress Text</Dropdown.Item>
@@ -58,7 +64,10 @@ function MyApp() {
               <Dropdown.Item className='button'eventKey="4">Correct Grammatical Errors</Dropdown.Item>
               <Dropdown.Item className='button'eventKey="5">Solve the Question</Dropdown.Item>
       </DropdownButton>
-  
+      <div className='check'>
+      <input type="checkbox" onChange={handleCheckboxChange} />
+        <label className='text-label'>Generate Image using Dall-E</label>
+      </div>
         </div>
       <div>
         <textarea rows="12" className='text-area' value={textAreaValue} onChange={handleTextAreaChange} />
