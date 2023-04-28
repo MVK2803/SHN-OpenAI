@@ -14,9 +14,9 @@ CORS(app)
 @app.route('/process_image', methods=['POST'])
 def process_image():
     code=int(dict(request.form)['code'])
-    
+    generate_image = True if (request.form['dalle'])=="true" else False
     image = request.files['image']
-    
+    print(generate_image)
     filename = image.filename
     extension = os.path.splitext(filename)[1]
     
