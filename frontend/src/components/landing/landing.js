@@ -1,48 +1,85 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Form, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import "./Landing.css";
+import anim from "../../assets/animation.json";
+import Lottie from "lottie-react";
+import compress from "../../assets/compress.svg";
+import expand from "../../assets/expand.svg";
+import grammar from "../../assets/grammar.svg";
+import spell from "../../assets/spell.svg";
+import image from "../../assets/image.svg";
+import Background from "../../assets/grid.svg";
 import { useNavigate } from 'react-router-dom';
-function MyApp() {
 
-  
+function MyApp() {
+  const featureData = [
+    {
+      icon: spell,
+      title: 'Correcting spelling mistakes'
+    },
+    {
+      icon: grammar,
+      title: 'Checking for grammatical errors'
+    },
+    {
+      icon: expand,
+      title: 'Expanding the text',
+    },
+    {
+      icon: compress,
+      title: 'Shortening the text',
+    },
+    {
+      icon: image,
+      title: 'Image Suggestion',
+    },
+  ];
+
   const navigate = useNavigate();
-  const handleown=(event)=>
-  {
+  const handleown = (event) => {
     event.preventDefault();
     navigate("/MyApp");
-  }
+  };
+
   return (
-    <div className='main-landing'>
-    <div className='nav-landing'>
-        <h className="Navbar">Text <span className='color-new'>Genie</span> </h>
-        <p>Powered by <a href='https://openai.com/' target="_blank"> OpenAI.com</a></p>
-        <hr></hr>
-    </div>
-    <div className='desc'>
-    <p>This project utilizes the power of both Optical Character Recognition (OCR) technology and state-of-the-art language generation models such as ChatGPT to provide a comprehensive solution for text extraction from images. The extracted text can then be modified as per the user's needs with the help of ChatGPT. The user has the option to choose from five different modifications:</p>
-    <ul>
-      <li><strong>Correcting spelling mistakes:</strong> The OCR technology used in this project may sometimes produce errors while recognizing text, especially with cursive or stylized fonts. ChatGPT can be used to correct these errors and provide a more accurate representation of the text.</li>
-      <li><strong>Checking for grammatical errors:</strong> ChatGPT can be used to analyze the text for grammatical errors and suggest corrections. This feature can be especially useful for users who need to produce high-quality written content.</li>
-      <li><strong>Expanding the text:</strong> ChatGPT can be used to generate additional content based on the extracted text. This feature can be useful for users who want to expand upon the information present in the image.</li>
-      <li><strong>Shortening the text:</strong> ChatGPT can be used to summarize the text in the image and provide a shorter version of it. This feature can be useful for users who want to quickly understand the key points present in the image.</li>
-      <li><strong>Suggesting an image related to the text:</strong> The DALLE model can be used to generate images related to the text in the image. This feature can be useful for users who want to supplement their written content with visual aids. (Due to time constraints we couldn't work with that, but will definitely attempt it in the future)</li>
-    </ul>
-    </div>
-    <div className='first-landing'>
-        
-        <div className='left-div'>
-            <button  onClick={handleown}>USE OUR API KEY</button>
+    <div
+      style={{
+        backgroundImage: `url(${Background})`,
+        backgroundRepeat: 'repeat',
+       
+      }}
+      className="bg-black text-gray-200 flex flex-col min-h-screen w-full"
+    >
+      <div className='mt-4 text-center self-center'>
+        <h className="md:text-8xl text-white text-5xl font-extrabold">TextGenie<span className='text-lime-500'>.</span></h>
+      </div>
+      <div className='mt-4 w-3/4 flex lg:flex-row flex-col text-left self-center'>
+        <div className='font-thin lg:w-1/2 w-full'>
+          <h className="md:text-5xl text-2xl text-lime-500 font-extrabold">ABOUT</h>
+          <p className=" md:text-2xl">This project utilizes the power of both Optical Character Recognition (OCR) technology and state-of-the-art language generation models such as ChatGPT to provide a comprehensive solution for text extraction from images. The extracted text can then be modified as per the user's needs with the help of ChatGPT.</p>
         </div>
-        <div className='right-div'>
-            <button  onClick={handleown}>USE YOUR API KEY</button>
-            <input placeholder='Enter API KEy'></input>
+        <div className='lg:w-1/2 w-full flex justify-center'>
+          <Lottie style={{ maxWidth: '100%', height: 'auto', width: '100%', maxWidth: '500px', maxHeight: '500px' }} animationData={anim} loop={true} />
         </div>
-      
-    </div>
+      </div>
+      <div className='self-center w-3/4'>
+        <h className="md:text-6xl text-lime-500 text-2xl font-extrabold">FEATURES</h>
+
+        <div className=" text-black flex flex-wrap justify-center">
+          {featureData.map((feature, index) => (
+            <div className='lg:w-1/3 md:w-1/2 w-full p-2' key={index}>
+              <div className="p-2 rounded-md bg-indigo-800 flex flex-col items-center space-y-3 text-xl text-center">
+                <img className="w-10 h-10" src={feature.icon} alt={feature.title} />
+                <h1 className="text-2xl text-white font-light capitalize break-words">{feature.title}</h1>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className='mt-4 lg:mt-6 mb-2 self-center w-3/4 flex'>
+        <button onClick={handleown} className=' bg-lime-500 text-white rounded-md p-2 mx-auto  text-xl md:text-3xl  '>Try TextGenie.↪</button>
+      </div>
     </div>
   );
 }
-//call app functions
+
 export default MyApp;
