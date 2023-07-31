@@ -54,7 +54,5 @@ app.post('/process_image', upload.single('image'), async (req, res) => {
     
 }
 });
-app.get("/", async (req, res) => {
-  res.send("Server done");
-});
+app.get("/",(req,res)=>{res.send("DONE")})
 app.listen(5000, () => console.log("at 5000"));
