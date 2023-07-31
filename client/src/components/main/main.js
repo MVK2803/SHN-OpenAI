@@ -65,7 +65,7 @@ function MyApp() {
     <div
       style={{
         backgroundImage: `url(${Background})`,
-        backgroundRepeat: 'repeat',
+        backgroundRepeat: ' repeat',
       }}
       className="bg-black text-gray-200 flex flex-col min-h-screen w-full"
     >
