@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { Navbar, Nav, Form, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import LoadingSpinner from '../loading/loader';
+import React, { useState } from 'react';import 'bootstrap/dist/css/bootstrap.min.css';
 import Background from "../../assets/grid.svg";
 import axios from 'axios';
-
+import anim from "../../assets/loading.json";
+import Lottie from "lottie-react";
 function MyApp() {
   const [textAreaValue, setTextAreaValue] = useState('');
   const [image, setImage] = useState(null);
@@ -75,7 +73,7 @@ function MyApp() {
         <h className="md:text-8xl text-white text-5xl font-extrabold">TextGenie<span className='text-lime-500'>.</span></h>
       </div>
 
-      {loading && <LoadingSpinner />}
+      
       
       <div className='justify-between mt-5 mb-5 w-3/4 flex flex-col-reverse md:flex-row self-center'>
         <div className='space-y-2 md:space-y-0 w-full md:w-1/2 flex flex-col'>
@@ -143,11 +141,14 @@ function MyApp() {
         </div>
       </div>
 
-      <div className='bg-indigo-800 rounded-md w-5/6 md:w-3/4 self-center relative'>
-        <button className='absolute p-2 bg-lime-600 rounded-md top-0 right-0 mt-2 mr-2'>COPY TEXT📃</button>
-        <textarea rows="12" className='p-4 pt-1 w-full bg-transparent' value={textAreaValue} onChange={handleTextAreaChange} />
+      <div className={` p-4 bg-indigo-800 rounded-md w-5/6 md:w-3/4 self-center relative ${loading ? 'hidden' : ''}`}>
+        <button className='absolute p-2 bg-lime-400 text-black rounded-md top-0 right-0 mt-2 mr-2' >Copy📃</button>
+        <textarea id="text-area" rows="12" className='  pt-1 w-full bg-transparent focus:outline-none' value={textAreaValue} onChange={handleTextAreaChange} />
       </div>
-      {dalle && <button className='button'><a href={dall_img} target='_blank'>CLICK HERE TO VIEW IMAGE</a></button>}
+      <div className={` bg-transparent flex justify-center  rounded-md w-5/6 md:w-3/4 self-center relative ${!loading ? 'hidden' : ''}`}>
+          <Lottie style={{ maxWidth: '100%',  width: '100%', maxWidth: '450px', maxHeight: '400px' }} animationData={anim} loop={true} />
+      </div>
+      {dalle && <button className='button'><a href={dall_img} target='_blank' rel="noreferrer">CLICK HERE TO VIEW IMAGE</a></button>}
 
     </div>
   );
