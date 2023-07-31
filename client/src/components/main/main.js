@@ -46,7 +46,7 @@ function MyApp() {
     setLoading(true);
     console.log(image);
     try {
-      const response = await axios.post('http://localhost:5000/process_image', formData, {
+      const response = await axios.post('https://textgenie-backend.vercel.app/process_image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }

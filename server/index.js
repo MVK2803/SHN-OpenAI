@@ -9,7 +9,9 @@ const app = express();
 const upload = multer({ dest: 'uploads/' });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000/',
+}));
 require('dotenv').config();
 app.post('/process_image', upload.single('image'), async (req, res) => {
   try {
