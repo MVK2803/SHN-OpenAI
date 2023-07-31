@@ -54,9 +54,7 @@ app.post('/process_image', upload.single('image'), async (req, res) => {
     
 }
 });
-
-const PORT = 5000; 
-app.listen(PORT, () => {
-  //console.log(`Server started on port ${PORT}`);
+app.get("/", async (req, res) => {
+  res.send("Server done");
 });
-module.exports = app;
+app.listen(5000, () => console.log("at 5000"));
