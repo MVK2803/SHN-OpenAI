@@ -6,7 +6,6 @@ import Background from "../../assets/grid.svg";
 import axios from 'axios';
 
 function MyApp() {
-  const [selectedOption, setSelectedOption] = useState('');
   const [textAreaValue, setTextAreaValue] = useState('');
   const [image, setImage] = useState(null);
   const [dalle, setDalle] = useState(false);
@@ -14,14 +13,14 @@ function MyApp() {
   const [dall_img, setDall_img] = useState("");
   const [selectedFileName, setSelectedFileName] = useState('CHOOSE OR DROP FILES');
 
-  const handleDropdownSelect = (eventKey) => {
-    setSelectedOption(eventKey);
-  }
+ 
 
   const [selectedButton, setSelectedButton] = useState('');
 
   const handleButtonClick = (button) => {
     setSelectedButton(button);
+    
+    
   };
 
   const handleCheckboxChange = (event) => {
@@ -42,10 +41,10 @@ function MyApp() {
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append('image', image);
-    formData.append('code', selectedOption);
+    formData.append('code', selectedButton);
     formData.append('dalle', dalle);
     setLoading(true);
-
+    console.log(image);
     try {
       const response = await axios.post('http://localhost:5000/process_image', formData, {
         headers: {
@@ -84,9 +83,9 @@ function MyApp() {
             {buttons.map((buttonName, index) => (
               <button
                 key={index}
-                onClick={() => handleButtonClick(`button${index + 1}`)}
+                onClick={() => handleButtonClick(index)}
                 className={`px-4 py-2 mr-2 mt-2 rounded-md ${
-                  selectedButton === `button${index + 1}`
+                  selectedButton === index 
                     ? 'bg-blue-500 text-white'
                     : 'border border-2 border-white text-gray'
                 }`}
@@ -97,20 +96,23 @@ function MyApp() {
           </div>
 
           <div className='md:hidden w-full'>
-            <select
-              id="countries"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option value="" disabled selected>
-                Choose an option
-              </option>
-              {buttons.map((button, index) => (
-                <option key={index} value={button}>
-                  {button}
-                </option>
-              ))}
-            </select>
-          </div>
+  <select
+    id="countries"
+    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    onChange={(event) => handleButtonClick(event.target.value)}
+    value={selectedButton}
+  >
+    <option value="" disabled>
+      Choose an option
+    </option>
+    {buttons.map((button, index) => (
+      <option key={index} value={index}>
+        {button}
+      </option>
+    ))}
+  </select>
+</div>
+
 
           <div>
             <input type="checkbox" onChange={handleCheckboxChange} />
@@ -143,7 +145,7 @@ function MyApp() {
 
       <div className='bg-indigo-800 rounded-md w-5/6 md:w-3/4 self-center relative'>
         <button className='absolute p-2 bg-lime-600 rounded-md top-0 right-0 mt-2 mr-2'>COPY TEXT📃</button>
-        <textarea rows="12" className='w-full bg-transparent' value={textAreaValue} onChange={handleTextAreaChange} />
+        <textarea rows="12" className='p-4 pt-1 w-full bg-transparent' value={textAreaValue} onChange={handleTextAreaChange} />
       </div>
       {dalle && <button className='button'><a href={dall_img} target='_blank'>CLICK HERE TO VIEW IMAGE</a></button>}
 
