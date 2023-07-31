@@ -17,7 +17,9 @@ The combined power of OCR, ChatGPT and DALLE makes this project a comprehensive 
 
 
 
-![image](https://user-images.githubusercontent.com/90597530/225818812-4afa5cdf-56e0-489e-bd85-8b734a185b0e.png)
+![image](https://github.com/MVK2803/SHN-OpenAI/assets/90597530/51fd2e34-16c0-429e-94a9-d6e8700cabd8)
+![image](https://github.com/MVK2803/SHN-OpenAI/assets/90597530/c90b4fbd-a62d-4be7-8841-4fd69d504e6e)
+
 
                                   
 [](https://github.com/TH-Activities/saturday-hack-night-template#team-members)Team members
