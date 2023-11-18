@@ -44,7 +44,7 @@ function MyApp() {
     setLoading(true);
     console.log(image);
     try {
-      const response = await axios.post('https://textgenie-backend-j0v2.onrender.com/process_image', formData, {
+      const response = await axios.post('http://localhost:5000/process_image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }
@@ -70,7 +70,7 @@ function MyApp() {
       className="bg-black text-gray-200 flex flex-col min-h-screen w-full"
     >
       <div className='mt-4 text-center'>
-        <h className="md:text-8xl text-white text-5xl font-extrabold">TextGenie<span className='text-lime-500'>.</span></h>
+        <h className="text-4xl text-white  font-bold">TextGenie<span className='text-lime-500'>.</span></h>
       </div>
 
       
@@ -146,7 +146,7 @@ function MyApp() {
         <textarea id="text-area" rows="12" className='  pt-1 w-full bg-transparent focus:outline-none' value={textAreaValue} onChange={handleTextAreaChange} />
       </div>
       <div className={` bg-transparent flex justify-center  rounded-md w-5/6 md:w-3/4 self-center relative ${!loading ? 'hidden' : ''}`}>
-          <Lottie style={{ maxWidth: '100%',  width: '100%', maxWidth: '450px', maxHeight: '400px' }} animationData={anim} loop={true} />
+          <Lottie style={{  width: '100%', maxWidth: '450px', maxHeight: '400px' }} animationData={anim} loop={true} />
       </div>
       {dalle && <button className='button'><a href={dall_img} target='_blank' rel="noreferrer">CLICK HERE TO VIEW IMAGE</a></button>}
 
