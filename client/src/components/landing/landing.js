@@ -64,10 +64,10 @@ function MyApp() {
       <div className='self-center w-3/4'>
         <h className=" text-lime-500 text-2xl font-extrabold">Features</h>
 
-        <div className=" text-black flex flex-wrap justify-center">
+        <div className=" text-black flex flex-wrap justify-center ">
           {featureData.map((feature, index) => (
-            <div className='lg:w-1/3 md:w-1/2 bg- w-full p-2' key={index}>
-              <div className="mx-auto w-[100px] h-[100px] rounded-[100px] justify-center bg-indigo-800 flex flex-col items-center space-y-3 text-xl text-center">
+            <div className='lg:w-1/3 md:w-1/2 bg- w-full p-2 transition hover:-translate-y-1 hover:scale-110 duration-300' key={index}>
+              <div className="transition mx-auto w-[100px] h-[100px] rounded-[100px] justify-center bg-indigo-800 flex flex-col  hover:bg-indigo-500 items-center space-y-3 text-xl text-center ">
                 <img className="w-10 h-10" src={feature.icon} alt={feature.title} />
                 
               </div>
@@ -77,7 +77,7 @@ function MyApp() {
         </div>
       </div>
       <div className='mt-4 lg:mt-6 mb-2 self-center w-3/4 flex'>
-        <button onClick={handleown} className=' bg-lime-500 text-white rounded-md p-2 mx-auto  text-xl   '>Try TextGenie.↪</button>
+        <button onClick={handleown} className=' bg-lime-500 text-white rounded-md p-2 mx-auto  text-2xl font-bold  transition hover:-translate-y-1 hover:scale-110 duration-300 '>Try TextGenie.</button>
       </div>
     </div>
   );
