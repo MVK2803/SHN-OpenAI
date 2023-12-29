@@ -3,7 +3,9 @@ const OpenAI=require( './controllers/apiGen');
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors'); 
-const textDetection = require('./controllers/textDetection'); 
+const textDetection = require('./controllers/textDetection');
+const pdfExtractor = require('./controllers/pdfExtractor');
+
 //configuring the modules
 const app = express();
 const upload = multer({ dest: 'uploads/' });
@@ -22,7 +24,16 @@ app.post('/process_image', upload.single('image'), async (req, res) => {
     
     const { code, dalle } = req.body;
     console.log(code,dalle);
-    const extractedText = await textDetection(imagePath); // Call the textDetection function
+
+    let extractedText;
+
+    // Check if the file has a PDF extension
+    if (req.file.mimetype === 'application/pdf') {
+      extractedText = await pdfExtractor(imagePath);
+    } else {
+      extractedText = await textDetection(imagePath);
+    }
+
     const openAI = new OpenAI(process.env.OPENAI_KEY);
     const types = [
         'Expand the following text.\n',
